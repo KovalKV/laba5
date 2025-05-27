@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Сучасний Сайт</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="container nav-container">
+      <div class="logo">🚀 MySite</div>
+      
+      <nav class="nav" id="navbar">
+        <ul class="nav-links">
+          <li><a href="#what-we-do">Що ми робимо</a></li>
+          <li><a href="#approach">Наш підхід</a></li>
+          <li><a href="#projects">Проєкти</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="#contact" class="btn nav-btn">Зв’язатись</a>
+          <button id="theme-toggle" class="theme-toggle">🌓</button>
+        </div>
+      </nav>
+
+      <button class="burger" id="burger">&#9776;</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>Ми створюємо інноваційні продукти</h2>
+      <p>Ваш бізнес — наш пріоритет. З нами ваш проєкт злетить.</p>
+      <a href="#contact" class="btn">Зв'язатися</a>
+    </div>
+  </section>
+
+  <section id="what-we-do" class="section reveal">
+    <div class="container">
+      <h2>Що ми робимо</h2>
+      <p>Веб-розробка, дизайн, консалтинг, підтримка.</p>
+    </div>
+  </section>
+
+  <section id="approach" class="section reveal">
+    <div class="container">
+      <h2>Наш підхід</h2>
+      <p>Фокус на користувача, адаптивність, автоматизація процесів.</p>
+    </div>
+  </section>
+
+  <section id="projects" class="section reveal">
+    <div class="container">
+      <h2>Наші проєкти</h2>
+      <div class="grid">
+        <div class="card">Проєкт 1</div>
+        <div class="card">Проєкт 2</div>
+        <div class="card">Проєкт 3</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 MySite. Всі права захищені.</p>
+    </div>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(section => observer.observe(section));
+
+    const burger = document.getElementById('burger');
+    const navbar = document.getElementById('navbar');
+
+    burger.addEventListener('click', () => {
+      navbar.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
